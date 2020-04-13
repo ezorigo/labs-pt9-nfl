@@ -9,6 +9,7 @@ verify_ssl = true
 flask-cors = "*"
 numpy = "*"
 gunicorn = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.7"

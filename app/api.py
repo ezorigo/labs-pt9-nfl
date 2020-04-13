@@ -6,6 +6,8 @@ nfl fantasy football player trades.
 
 from flask import Flask, request, render_template, jsonify
 from flask_cors import CORS
+from .data import data
+from .data import week1
 import numpy as np
 
 def create_app():
@@ -33,12 +35,11 @@ def create_app():
         player9_id = request.args.get('player9_id')
         week = request.args['week']
 
-        response = []
+        request_args = [player0_id, player1_id]
+        results = week1[week1.index.isin(request_args)]
+        json = results.to_json(orient='table')
 
-        response.append({player0_id: int(np.random.random_integers(100))})
-        response.append({player1_id: int(np.random.random_integers(100))})
-
-        return jsonify(response)
+        return json
 
     @app.errorhandler(404)
     def page_not_found(error):
